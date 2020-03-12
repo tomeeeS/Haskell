@@ -34,3 +34,48 @@ instance Ord' a => Ord' [a] where
     lte (x:xs) (y:ys) =
         lte x y && lte xs ys
     
+-- Show, deriving (Eq, Ord, Show)
+data List a = Empty | Cons a (List a)
+    deriving (Eq, Ord, Show)
+
+l1 :: List Int
+l1 = Empty
+
+l2 :: List Int
+l2 = Cons 10 (Cons 12 Empty)
+
+l2' :: [Int]
+l2' = (:) 10 ((:) 20 ((:) 30 []))
+
+map' :: (a -> b) -> List a -> List b
+map' f Empty = Empty
+map' f (Cons x xs) = Cons (f x) (map' f xs)
+
+data Tree = Leaf | Branch Tree Tree
+    deriving (Eq, Ord, Show)
+
+t1 :: Tree
+t1 = Leaf
+
+t2 :: Tree
+t2 = Branch Leaf Leaf
+
+t3 :: Tree
+t3 = Branch 
+        (Branch
+            Leaf 
+            Leaf)
+        (Branch
+            Leaf 
+            (Branch
+                Leaf 
+                Leaf)
+        )
+    
+data Color = Red | Green | Blue
+
+instance Eq Color where
+    (==) Red Red = True
+    (==) Green Green = True
+    (==) Blue Blue = True
+    (==) _ _ = False
