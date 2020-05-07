@@ -37,7 +37,7 @@ f3 :: (b -> c) -> (a -> b) -> a -> c
 f3 f g a = f(g a)
 
 f4 :: (a -> b -> c) -> (b -> a -> c)
-f4 f a b = f b a
+f4 = flip
 
 f5 :: ((a, b) -> c) -> a -> b -> c
 f5 = \f a b -> f (a, b)

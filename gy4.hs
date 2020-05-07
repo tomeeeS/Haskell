@@ -25,12 +25,12 @@ mapMaybeTree f (Node l r) = case mapMaybeTree f l of
         Just r' -> Just (Node l' r')
 
 bind :: Maybe a -> (a -> Maybe b) -> Maybe b
-bind Nothing f = Nothing
+bind Nothing _ = Nothing
 bind (Just a) f = f a
 
 filterMaybe' :: (a -> Maybe Bool) -> [a] -> Maybe [a]
-filterMaybe' f [] = Just []
+filterMaybe' _ [] = Just []
 filterMaybe' f (x:xs) =
-    bind (f x) $ \b -> 
-        bind (filterMaybe' f xs) $ \xs' ->
-            Just (if b then x:xs else xs')
+    bind (f x) $ \b ->
+    bind (filterMaybe' f xs) $ \xs' ->
+    Just (if b then x:xs' else xs')
